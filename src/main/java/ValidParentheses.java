@@ -1,3 +1,8 @@
+/************************
+    Method: Use a stack to find if the last pushed element is an open parentheses/bracket
+            of matching type
+ *************************/
+
 import java.util.Stack;
 public class ValidParentheses {
     public boolean check(String parentheses){
@@ -11,6 +16,8 @@ public class ValidParentheses {
             } else if (c == '{'){
                 stack.push('}');
             } else if (stack.isEmpty() || stack.pop() != c){
+                // Stack may be empty if the latest action was a pop and there are no elements left
+                // Latest element is popped only if nothing is pushed, which means the pop is not run everytime
                 return false;
             }
 
