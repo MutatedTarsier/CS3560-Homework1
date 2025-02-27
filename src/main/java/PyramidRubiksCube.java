@@ -74,18 +74,11 @@ public class PyramidRubiksCube {
 
     public boolean validateCube(){
         // Check that there are 9 tiles for each side
-        for (char[][] face : this.pyramid) {
-            // Loop through all faces
-            int tile_sum = 0; // Sum of tiles for current face
-            for (char[] row : face) {
-                // Loop through all rows
-                for (char col : row) {
-                    // Loop through all columns and count
-                    tile_sum += 1;
-                }
-            }
+        for (int c = 0; c < colors.length; c++) {
+            int tile_sum = getTileSum(c);
             if (tile_sum != 9) return false; // If tile_sum is not 9, cube is not valid
         }
+
 
         // Check that every side has a color
         for (int f = 0; f < this.pyramid.length; f++) {
@@ -101,6 +94,24 @@ public class PyramidRubiksCube {
         }
 
         return true;
+    }
+
+    private int getTileSum(int c) {
+        char color = colors[c];
+        int tile_sum = 0; // Sum of tiles for current color
+        for (char[][] face : this.pyramid) {
+            // Loop through all faces
+            for (char[] row : face) {
+                // Loop through all rows
+                for (char col : row) {
+                    // Loop through all columns and count
+                    if (col == color) {
+                        tile_sum += 1;
+                    }
+                }
+            }
+        }
+        return tile_sum;
     }
 
     public char[][][] getPyramid() {
