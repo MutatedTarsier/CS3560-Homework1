@@ -78,7 +78,7 @@ public class PyramidRubiksCube {
             int tile_sum = getTileSum(c);
             if (tile_sum != 9) return false; // If tile_sum is not 9, pyramid is not valid since there are not 9 tiles for each color
         }
-
+        // If not valid, should have returned false by this point
         return true;
     }
 
