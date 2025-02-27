@@ -1,3 +1,8 @@
+/**********************
+    Method: Creates the pyramid with a 3D matrix, and fill every row with a color character
+            Also provide a method for initializing only the edges
+ *********************/
+
 public class PyramidRubiksCube {
     private char[][][] pyramid;
     private final int rows;
