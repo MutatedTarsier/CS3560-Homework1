@@ -73,24 +73,10 @@ public class PyramidRubiksCube {
     }
 
     public boolean validateCube(){
-        // Check that there are 9 tiles for each side
+        // Check that there are 9 tiles for each color
         for (int c = 0; c < colors.length; c++) {
             int tile_sum = getTileSum(c);
-            if (tile_sum != 9) return false; // If tile_sum is not 9, cube is not valid
-        }
-
-
-        // Check that every side has a color
-        for (int f = 0; f < this.pyramid.length; f++) {
-            char[][] face = this.pyramid[f];
-            // Loop through faces
-            for (char[] row : face) {
-                // Loop through rows
-                for (char col : row) {
-                    // Loop through columns
-                    if (col != colors[f]) return false;
-                }
-            }
+            if (tile_sum != 9) return false; // If tile_sum is not 9, pyramid is not valid since there are not 9 tiles for each color
         }
 
         return true;
