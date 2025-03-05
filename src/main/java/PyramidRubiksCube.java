@@ -42,6 +42,38 @@ public class PyramidRubiksCube {
         }
     }
 
+    public char[][] getEdges(){
+        // Gets all edges of the current state of the pyramid as character arrays
+        char[][] all_edges = new char[6][2]; // There should be a total of 6 independent edges on a pyramid rubik
+
+        for (int face = 0; face < NUM_FACES - 1; face++) {
+            // Grab the left and bottom edges, add to total, then repeat 3 times for all edges
+            // Edge in format {front, adjacent}
+
+            // Get Left Edge
+            char current_color = pyramid[face][1][0];
+            char adjacent_color_left = pyramid[face == 0 ? 2 : face - 1][1][2];
+            char[] left_edge = {current_color, adjacent_color_left};
+
+            // Bottom edge depends on current face
+            int[] bottom_edge_index = {1, 0};
+            if (face == 1){
+                bottom_edge_index[1] = 2;
+            } else if (face == 2){
+                bottom_edge_index = new int[]{2, 2};
+            }
+
+            // Get Bottom Edge
+            char adjacent_color_bottom = pyramid[3][bottom_edge_index[0]][bottom_edge_index[1]];
+            char[] bottom_edge = {current_color, adjacent_color_bottom};
+
+            // Add both edges to total
+            all_edges[face*2] = left_edge;
+            all_edges[face*2 + 1] = bottom_edge;
+        }
+        return all_edges;
+    }
+
 
     private void initializeEdges(){
         // Edges already assigned in initialize faces technically,
