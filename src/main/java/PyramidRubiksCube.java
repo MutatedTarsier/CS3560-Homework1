@@ -5,6 +5,7 @@
 
 public class PyramidRubiksCube {
     private char[][][] pyramid;
+
     private final int rows;
     private static final char[] colors = {'r', 'g', 'b', 'y'};
     private static final int NUM_FACES = 4;
@@ -12,10 +13,11 @@ public class PyramidRubiksCube {
     PyramidRubiksCube() {
         this.rows = 3;
         this.pyramid = new char[4][rows][];
+        initializeFaces();
 
     }
 
-    public void initializeFaces(){
+    private void initializeFaces(){
         /********************************************************
             Method:
             First create a 2D face array
@@ -41,35 +43,10 @@ public class PyramidRubiksCube {
     }
 
 
-    public void initializeEdges(){
-        /********************************************************
-         Method:
-         First create a 2D face array
-         Then fill the face array with rows of size 1, 3, 5
-         If the column is at an edge position, place the color
-         Else place '0'
-         Purpose:
-         Initialize only the edges with color characters and the rest with padding
-         ********************************************************/
+    private void initializeEdges(){
+        // Edges already assigned in initialize faces technically,
+        // so I will only implement a way to get the edges
 
-        for (int face_index = 0; face_index < NUM_FACES; face_index++) {
-            char[][] face = new char[rows][]; // Create the 2D face array to be filled
-            for (int row_index = 1; row_index <= this.rows; row_index++) {
-                char[] new_row = new char[row_index*2 - 1]; // Create row to be filled
-                for (int col_index = 0; col_index < row_index*2 - 1; col_index++) {
-                    // Check if the column is in edge position, only for a pyramid of 3 rows for now
-                    boolean secondRow_edges = row_index == 2 && (col_index == 0 || col_index == 2);
-                    boolean thirdRow_edges = row_index == 3 && (col_index == 2);
-                    if (secondRow_edges || thirdRow_edges) {
-                        new_row[col_index] = colors[face_index]; // Place color character if at edge position
-                    } else {
-                        new_row[col_index] = '0'; // Place '0' if not at edge
-                    }
-                }
-                face[row_index - 1] = new_row; // Place row into face
-            }
-            this.pyramid[face_index] = face; // Place face into all faces
-        }
     }
 
     public boolean validateCube(){
@@ -101,10 +78,6 @@ public class PyramidRubiksCube {
     }
 
     public char[][][] getPyramid() {
-        /********************************************************
-         Purpose:
-         Getter for pyramid
-         ********************************************************/
         return pyramid;
     }
 
